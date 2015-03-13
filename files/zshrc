@@ -1,0 +1,69 @@
+# Lines configured by zsh-newuser-install
+HISTFILE=~/.history
+HISTSIZE=1000
+SAVEHIST=10000
+setopt autocd extendedglob notify
+bindkey -e
+# End of lines configured by zsh-newuser-install
+# The following lines were added by compinstall
+zstyle :compinstall filename '/home/braunmagrin/.zshrc'
+
+autoload -Uz compinit
+compinit
+# End of lines added by compinstall
+
+# show spelling correction options for commands
+setopt correct
+# appends histories to HIST_FILE instead of overwrtiing it, do it in 'real time'
+setopt incappendhistory
+# ignore duplicates in history
+setopt histignoredups
+# ignore lines starting with a space 
+setopt histignorespace
+# enables interactive comments
+setopt interactivecomments
+
+# Key bindings
+autoload zkbd
+source ~/.zkbd/xterm-:0
+
+[[ -n ${key[PageUp]} ]] && bindkey "${key[PageUp]}" history-search-backward
+[[ -n ${key[PageDown]} ]] && bindkey "${key[PageDown]}" history-search-forward
+
+bindkey ';5D' emacs-backward-word
+bindkey ';5C' emacs-forward-word
+
+# PROMPT variables
+PS1='%B%~%# %b'
+RPROMPT='%n@%m'
+
+# enable color support of ls and also add handy aliases
+if [ -x /usr/bin/dircolors ]; then
+    test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
+    alias ls='ls --color=auto'
+    #alias dir='dir --color=auto'
+    #alias vdir='vdir --color=auto'
+
+    alias grep='grep --color=auto'
+    alias fgrep='fgrep --color=auto'
+    alias egrep='egrep --color=auto'
+    alias rgrep='rgrep --color=auto'
+fi
+
+alias la='ls -A'
+
+alias vim='vim -p'
+alias gvim='gvim -p --remote-tab-silent'
+
+alias bc='bc -l'
+
+alias nbserver='ipython notebook --profile=nbserver'
+
+#alias less='less -XFR' # coulsd have defined a env var LESS="-XFR"
+
+# environment variables
+export LESS="-XFR"
+
+# virtualenvwrapper
+export WORKON_HOME=~/.envs
+source /usr/local/bin/virtualenvwrapper.sh
