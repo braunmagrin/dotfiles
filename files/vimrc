@@ -200,3 +200,7 @@ inoremap <silent> <C-v> <C-r><C-o>+
 nnoremap <F2> :set invpaste paste?<CR>
 set pastetoggle=<F2>
 set showmode
+
+" Defines more natural split opening settings
+set splitbelow
+set splitright
