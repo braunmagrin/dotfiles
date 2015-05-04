@@ -48,6 +48,9 @@ Plugin 'tomtom/tcomment_vim'
 Plugin 'tpope/vim-surround'
 "Plugin 'sheerun/vim-ployglot'
 
+" File styleguides
+Plugin 'editorconfig/editorconfig-vim'
+
 " Remember
 Plugin 'chrisbra/csv.vim'
 "Plugin 'godlygeek/tabular'
