@@ -46,7 +46,8 @@ Plugin 'airblade/vim-gitgutter'
 Plugin 'majutsushi/tagbar'
 Plugin 'tomtom/tcomment_vim'
 Plugin 'tpope/vim-surround'
-"Plugin 'sheerun/vim-ployglot'
+Plugin 'tpope/vim-unimpaired'
+Plugin 'hdima/python-syntax'
 
 " File styleguides
 Plugin 'editorconfig/editorconfig-vim'
@@ -83,7 +84,7 @@ let g:NERDTreeChDirMode = 2 "automatically change CWD whenever the tree root is 
 
 " enable and configure airline
 let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#tabline#show_buffers = 0
+let g:airline#extensions#tabline#show_buffers = 1
 let g:airline#extensions#tabline#left_sep = ' '
 let g:airline#extensions#tabline#left_alt_sep = '|'
 let g:airline_theme='badwolf'
@@ -100,6 +101,14 @@ let g:vim_json_warnings = 1
 " Syntastic
 let g:syntastic_always_populate_loc_list=1 " always populate the location list with the errors found
 let g:syntastic_auto_loc_list=1 " when set to 1, error window opens automaticaly when there are errors and closes automatically when there are none
+
+" jedi-vim
+" the autocomplete was too slow when using pandas or large files
+let g:jedi#show_call_signatures = 0
+let g:jedi#popup_on_dot = 0
+
+" python-syntax
+let python_highlight_all = 1
 
 """""""""""""""" General options
 set mouse=a " enables mouse
@@ -130,8 +139,8 @@ set cursorline " highlight current line
 set showmatch
 
 set list
-set listchars=tab:>-,trail:.,nbsp:.
-autocmd filetype html,xml,todo set listchars-=tab:>-
+set listchars=trail:.,nbsp:.
+"autocmd filetype html,xml,todo set listchars-=tab:>-
 
 
 colorscheme slate
@@ -160,12 +169,19 @@ noremap <silent> <Leader>c :nohl<Return>
 noremap <silent> <Leader>t :NERDTreeToggle<Return>
 noremap <silent> <Leader>f :NERDTreeFind<Return>
 
+noremap <silent> <Leader>q :copen<Return>
+noremap <silent> * *N
+
+" Fast word replace
+nnoremap <Leader>r * :%s///g<left><left>
+
 " use ctrl-p to search for the word under the cursor and the selected text
 nmap <Leader>w :CtrlP<CR><C-\>w
 vmap <Leader>v <Esc>:CtrlP<CR><C-\>v
 nmap <Leader>j vi',v<C-t>
 
-nnoremap K :grep! "\b<C-r><C-w>\b" . <CR>
+nnoremap K :grep! -r "\b<C-r><C-w>\b" * <CR>
+" command -nargs=+ -complete=file -bar Ag silent! grep! <args>|cwindow|redraw!
 
 " 'k' and 'j' navigate in screen lines (wrapped) instead of real lines
 noremap <silent> j gj
@@ -204,3 +220,4 @@ set showmode
 " Defines more natural split opening settings
 set splitbelow
 set splitright
+
