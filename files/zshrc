@@ -33,8 +33,10 @@ source ~/.zkbd/xterm-:0
 bindkey ';5D' emacs-backward-word
 bindkey ';5C' emacs-forward-word
 
+source ~/dev/zsh-git-prompt/zshrc.sh
+
 # PROMPT variables
-PS1='%B%~%# %b'
+PS1='%B%~ %b$(git_super_status)%# '
 RPROMPT='%n@%m'
 
 # enable color support of ls and also add handy aliases
@@ -57,13 +59,33 @@ alias gvim='gvim -p --remote-tab-silent'
 
 alias bc='bc -l'
 
-alias nbserver='ipython notebook --profile=nbserver'
+alias brightness='xbacklight -set 100'
+alias brightness='xbacklight -set 100'
 
-#alias less='less -XFR' # coulsd have defined a env var LESS="-XFR"
+alias please=sudo
+
+# alias git and enable autocompletion
+alias g=git
+_complete -o bashdefault -o default -o nospace -F _git g 2>/dev/null \
+        || _complete -o default -o nospace -F _git g
 
 # environment variables
 export LESS="-XFR"
+export EDITOR="vim"
 
 # virtualenvwrapper
 export WORKON_HOME=~/.envs
 source /usr/local/bin/virtualenvwrapper.sh
+
+# BRAVI related configs
+alias nbserver='ipython2 notebook --profile=nbserver'
+
+alias weka='java -Xmx1000M -jar ~/Programs/weka-3-6-12/weka.jar'
+
+
+export SPARK_HOME=/home/braunmagrin/Programs/spark-1.5.0
+export PYTHONPATH=$SPARK_HOME/python/:$PYTHONPATH
+export PYTHONPATH=$SPARK_HOME/python/lib/py4j-0.8.2.1-src.zip:$PYTHONPATH
+
+# list columns of a CSV
+csvcolumns() { head -1 "$1" | sed 's/,/\n/g' | sort ; }
