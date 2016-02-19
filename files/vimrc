@@ -221,3 +221,7 @@ set showmode
 set splitbelow
 set splitright
 
+" GitGutter aliases
+nnoremap <Leader>gn :GitGutterNextHunk<Return>
+nnoremap <Leader>gp :GitGutterPrevHunk<Return>
+
